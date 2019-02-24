@@ -87,11 +87,11 @@ Main::
 	ld	hl,StackTop
 	ld	sp,hl
 
-.wait	ldh	a,[rLY]
+.wait	ldh	a,[_HW+rLY]
 	cp	144
 	jr	nc,.wait
 	ld	a,0
-	ldh	[rLCDC],a
+	ldh	[_HW+rLCDC],a
 
 	ld	hl,Font
 	ld	de,$8000
@@ -99,23 +99,23 @@ Main::
 	call	mem_Copy
 
 	ld	a,0
-	ldh	[rSCY],a
-	ldh	[rSCX],a
+	ldh	[_HW+rSCY],a
+	ldh	[_HW+rSCX],a
 
 	ld	a,STATF_LYC
-	ldh	[rSTAT],a
+	ldh	[_HW+rSTAT],a
 
 	ld	a,80
-	ldh	[rLYC],a
+	ldh	[_HW+rLYC],a
 
 	ld	a,%00000011
-	ldh	[rBGP],a
+	ldh	[_HW+rBGP],a
 
 	ld	a,IEF_VBLANK	;|IEF_LCDC
-	ldh	[rIE],a
+	ldh	[_HW+rIE],a
 
 	ld	a,LCDCF_ON|LCDCF_BG8000|LCDCF_BG9800|LCDCF_BGON
-	ldh	[rLCDC],a
+	ldh	[_HW+rLCDC],a
 
 	ei
 
